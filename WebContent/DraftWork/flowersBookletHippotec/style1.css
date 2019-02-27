@@ -1,0 +1,15 @@
+.flowersGrid{
+	
+	display: inline-block;
+	width: 20%;
+	min-height: 200px;;
+	text-align: center;
+	border: 2px solid black;
+	margin: 20px;
+}
+
+.flowersGrid img{
+	
+	width:100%;
+	
+}

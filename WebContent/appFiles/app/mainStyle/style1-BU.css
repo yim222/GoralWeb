@@ -1,0 +1,96 @@
+body {
+	
+	
+
+    font-family: 'Merriweather', serif;
+
+
+	
+}
+
+#mainArea{
+	
+	width:80%;
+	height:80%;
+	border: solid black 2px;
+	padding:20px;
+	
+	
+}
+.featureBox{
+	
+	background-color: green;
+	padding: 20px;
+	width:75%;
+		
+}
+
+#displayListEl, .listNumber{
+	font-size: 20px;
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: 500;
+	color: black;
+	background-color: aqua;
+	display: inline-block;
+	
+}
+#displayListEl{
+	
+	position:absolute; 
+	right: 5px;
+	top: 5px;
+	width: 25%;
+	padding: 5%;
+	border: 2px solid black;
+	min-height: 100%;	
+}
+
+#drawnedNumbers, #drawnedNumbers .listNumber{
+	
+	color: white;
+	
+}
+
+.featureBox#addRangeEl {
+	
+	background-color: #cdd12e;
+	
+}
+
+/*
+background: linear-gradient(direction, color-stop1, color-stop2, ...);
+*/
+
+.featureBox#addSinglesEl {
+	
+	/*background: linear-gradient(right, blue, white);*/
+	background-color: brown;
+	/*background: linear-gradient(to right, green , blue); /* Standard syntax (must be last) */
+	
+}
+/*8DADB8*/
+
+
+.featureBox#removeRangeEl {
+	
+	/*background: linear-gradient(right, blue, white);*/
+	background-color: #8DADB8;
+	/*background: linear-gradient(to right, green , blue); /* Standard syntax (must be last) */
+	
+}
+/*40FF40*/
+.featureBox#removeSinglesEl {
+	
+	/*background: linear-gradient(right, blue, white);*/
+	background-color: #40FF40;
+	/*background: linear-gradient(to right, green , blue); /* Standard syntax (must be last) */
+	
+}
+
+.featureBox#drawEl{
+	
+	background-color: #f1fb44;
+	
+}
+
+

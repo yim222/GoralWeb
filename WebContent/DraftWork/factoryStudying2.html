@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html><!-- enter the UTF .. also...-->
+	<head>
+		<meta charset="UTF-8"/>
+		<title>factory studying- part 2
+		</title>
+		<link href ="angular_styling.css" rel= "stylesheet">
+		
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<!--<script src = "resources/angular.js"></script>-->
+		<style>
+		.explain{
+			background-color:yellow;
+			color:black;
+		}
+		</style>
+		
+	</head>
+
+	<body >
+		
+		<div ng-app ="myApp" ng-controller ="myctrl">
+		
+			<form>
+				<input type = 'text' ng-model = "checkme" >
+				
+
+			</form>
+		<button ng-click = "func1()"> act </button>
+		
+		<div ng-controller="MyController2"></div>
+		</div>
+		
+		
+		<script>
+		objArgs = function(text){
+			
+			
+			console.log("This is the text");
+		}
+		var MainApp = angular.module("myApp",[]);
+		
+		
+		MainApp.controller('myctrl', function($scope,myProvider, myFactory
+				, service1, valueProvider, constantProvider,objGenerator){
+				console.log("MyController - myProvider: " + myProvider);
+				
+				console.log("MyController1 - myFactory: " + myFactory);
+				
+				
+				 
+				console.log("MyController1 - service1: " + service1);
+				
+				//value
+				console.log("MyContorller1 - value  = " + valueProvider);
+				
+				//it's can be changed:
+				valueProvider = 20;
+				console.log("MyContorller1 - value  = " + valueProvider);
+				
+				//constant
+				console.log("MyContorller1 - constant   = " + constantProvider);
+				
+				//it's can be changed here:
+				constantProvider = 20;
+				console.log("MyContorller1 - constant  = " + constantProvider);
+				
+				//creating new obj
+				
+				var obj1 = objGenerator.newObj("Object 1");
+				
+				var obj2 = objGenerator.newObj("Object 2");
+				
+				
+				//see the value is remain.
+				console.log(obj1);
+				
+				
+				
+				
+				
+				
+				
+				console.log("-------------------------------------------------------------------------");
+				$scope.checkme = "eee";
+				
+				
+				$scope.func1 = function(){
+					
+					var str = $scope.checkme;
+					alert(str);
+					};
+			});
+		MainApp.controller("MyController2", function(myProvider, myFactory) { // ADDED this controller
+		    console.log("MyController2 - myProvider: " + myProvider);
+		    console.log("MyController2 - myFactory: " + myFactory);
+		});
+		
+		//U cannot do that with service? DOn't know why
+		MainApp.factory("myFactory", function() { // CHANGED “provider" to “factory"
+		    console.log("Factory function called.");
+		    return new objArgs("custom argument");
+		});
+		
+		
+		MainApp.provider("myProvider", function() {
+			 this.value = "My Value";
+
+			    this.setValue = function(newValue) {
+			        this.value = newValue;
+			    };
+
+			    this.$get = function() {
+			    	
+			        return this.value;
+			    };
+		});
+		
+		//here u can give the provider value before it created. (I cannot do it throught the factory pars?)
+		MainApp.config(function(myProviderProvider) { // ADDED config section
+		    // Note the extra "Provider" suffix
+		    myProviderProvider.setValue("New Izhar Value");
+		    myProviderProvider.constant2 = 30;
+		});
+
+		/*
+		//see how it's changed in the config but value not - not success
+		MainApp.constant("constant2", 15);
+		
+		MainApp.config(function(constant2Constant) {  // ADDED config section
+			constant2Provider = 60;
+		});
+		*/
+		
+		MainApp.service("service1", function() { // CHANGED “provider" to “factory"
+		    console.log("Service1 function called.");
+		    return new objArgs("custom argument");
+	        
+		    
+		});
+		
+		//value provider - it's predefined value that can changed.
+		MainApp.value("valueProvider", 3);
+		//value provider - it's predefined value that can changed.
+		MainApp.value("valueProvider", 15);
+		
+		
+		//Constant provider - it's predefined value that cannot be changed.
+		MainApp.constant("constantProvider", 3);
+		//Constant provider - it's predefined value that cannot be changed.
+		MainApp.constant("constantProvider", 15);
+		
+		
+		//wont work 
+		/*
+		MainApp.config(function(valueProvider) {
+		    console.log(valueProvider);
+		});
+		*/
+		
+		//work
+		MainApp.config(function(constantProvider) {
+		    console.log("config proceess = "  + constantProvider);
+		});
+		
+		//new Objecy
+		
+		MainApp.factory("objGenerator", function(){
+			
+			return new function(){
+				
+				this.newObj = function(x){
+					
+					
+					console.log("My value x is : " +x);
+					return x ; 
+				}
+				
+			}
+			
+			
+		});
+		</script>		
+		
+	</body>
+
+
+</html>
+
+

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html><!-- enter the UTF .. also...-->
+	<head>
+		<meta charset="UTF-8"/>
+		<title>factory studying</title>
+		<link href ="angular_styling.css" rel= "stylesheet">
+		
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<!--<script src = "resources/angular.js"></script>-->
+		<style>
+		.explain{
+			background-color:yellow;
+			color:black;
+		}
+		</style>
+		
+	</head>
+
+	<body >
+		
+		<div ng-app ="myApp" ng-controller ="myctrl">
+		
+			<form>
+				<input type = 'text' ng-model = "checkme" >
+				
+
+			</form>
+		<button ng-click = "func1()"> act </button>
+		
+		<div ng-controller="MyController2"></div>
+		</div>
+		
+		
+		<script>
+		var MainApp = angular.module("myApp",[]);
+		
+		MainApp.provider("myProvider", function() {
+		    this.$get = function() {
+		        return "My Vasslue";
+		    };
+		});
+		MainApp.controller('myctrl', function($scope,myProvider, myFactory
+				,myFactory2, myFactory3, service1, myProvider2){
+				console.log("MyController - myProvider: " + myProvider);
+				
+				console.log("MyController1 - myFactory: " + myFactory);
+				
+				console.log("MyController1 - myFactory2: " + myFactory2.getValue()); 
+				
+				console.log("MyController1 - myFactory3: " + myFactory3.getValue()); 
+				
+				console.log("MyController1 - myFactory3: " + myFactory3.xx()); 
+				
+				console.log("MyController1 - service1: " + service1.getValue()); 
+				console.log("MyController1 - service1: " + service1.xx()); 
+				
+				console.log("MyController1 - myProvider2: " + myProvider2.getValue()); 
+				
+				console.log("MyController1 - myProvider2: " + myProvider2.xx()); 
+				myProvider2.yy();
+				
+				
+				//trying to change variables - not changed
+				var x = "5";
+				
+				console.log("x before = " + x);
+				myProvider2.add10(x);
+				console.log("x after = "  + x);
+				
+				
+				//trying to change scope variables - not changed
+				$scope.x = 5;
+				
+				console.log("$scope.x before = " + $scope.x);
+				myProvider2.add10($scope.x);
+				console.log("$scope.x after = "  + $scope.x);
+				
+				
+				//tryin object - not changed too 
+				
+				obj1 = {x: 5};
+				
+				console.log("obj1.x before = " + obj1.x);
+				myProvider2.add10(obj1.x);
+				console.log("obj1.x after = "  + obj1.x);
+				console.log("-------------------------------------------------------------------------");
+				$scope.checkme = "eee";
+				
+				
+				$scope.func1 = function(){
+					
+					var str = $scope.checkme;
+					alert(str);
+					};
+			});
+		MainApp.controller("MyController2", function(myProvider, myFactory) { // ADDED this controller
+		    console.log("MyController2 - myProvider: " + myProvider);
+		    console.log("MyController2 - myFactory: " + myFactory);
+		});
+		
+		MainApp.factory("myFactory", function() { // CHANGED “provider" to “factory"
+		    console.log("Factory function called.");
+		    return "My Factory Value";
+		});
+		
+		//with object
+		MainApp.factory("myFactory2", function() { // CHANGED “provider" to “factory"
+		    console.log("Factory2 function called.");
+		    return new MyObject(); // CREATE an instance of our object
+		});
+		
+		//with inner function of object
+		MainApp.factory("myFactory3", function() { // CHANGED “provider" to “factory"
+		    console.log("Factory3 function called.");
+		    return new function() { // INLINED our object constructor
+		       
+		        this.xx = function(){
+			    	
+			    	
+			    	return "other function";
+			    };
+		    };
+		});
+		
+		//The same, but with service
+		MainApp.service("service1", function() { // CHANGED “provider" to “factory"
+		    console.log("Service1 function called.");
+		   
+	        this.getValue = function() {
+	            return "My inlined object Value - from service";
+	        };
+	        this.xx = function(){
+		    	
+		    	
+		    	return "other function - from service";
+		    };
+		    
+		});
+		
+		
+		//Object
+		function MyObject() { // ADDED our object constructor
+		    this.getValue = function() {
+		        return "My getValue Value";
+		    };
+		    
+		}
+		
+		//provider 2
+		MainApp.provider("myProvider2", function() {
+		    this.$get = function() {
+		    	return new function() { // INLINED our object constructor
+			        this.getValue = function() {
+			            return "My inlined  myProvider2 object Value";
+			        };
+			        this.xx = function(){
+				    	
+				    	
+				    	return "other myProvider2 function";
+				    };
+					 this.yy = function(){
+				    	
+				    	
+				    	console.log("just provider2 not return. yy");
+				    };
+				    this.add10 = function (x){
+				    	
+				    	x = x + 10;
+				    	console.log("x in the function = " + x);
+				    };
+			    };
+		    };
+		});
+		</script>		
+		
+	</body>
+
+
+</html>
+
+

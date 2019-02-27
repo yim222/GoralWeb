@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html><!-- enter the UTF .. also...-->
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Trying 5 - Goral WEB</title>
+		<!--  <link href ="angular_styling.css" rel= "stylesheet">-->
+		
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<!--<script src = "resources/angular.js"></script>-->
+		<style>
+		.explain{
+			background-color:yellow;
+			color:black;
+		}
+		</style>
+		
+	</head>
+
+	<body style = "padding-bottom : 50px;">
+		
+		<div ng-app ="myApp" ng-controller ="myctrl">
+		
+			<form>
+				<input type = 'text' ng-model = "checkme" >
+				
+
+			</form>
+			<p ng-init = "myVar = {x : '12', y :'17' }"> my var is : x = {{myVar.x + ' y = ' + myVar.y}}</p>
+			
+			X:
+			<input ng-model = "sendMe.x">
+			Y:
+			<input ng-model = "sendMe.y">
+			<p>Here I put var to send in the iinput. after I send it to the server it's should affect on myVar</p>
+			<button ng-click = "submitFunction()"> send </button>
+			<h1>Trying 2</h1>
+			<p ng-init = "myVar2 = {from : '12', to :'17', id : 50 }"> my var2 is : from =  
+			{{myVar2.from + ' to = ' + myVar2.to + ' id = ' +myVar2.id}}</p>
+			
+			from:
+			<input ng-model = "sendMe2.from">
+			to:
+			<input ng-model = "sendMe2.to">
+			id:
+			<input ng-model = "sendMe2.id">
+			<p>Here I put var to send in the iinput. after I send it to the server it's should affect on myVar2</p>
+			<button ng-click = "submitFunction2()"> send2 </button>
+			
+			
+		<button ng-click = "func1()"> act </button>
+		<h1>Let's Get list </h1>
+		<p>This is the list[4] of the array of the list, after u send it's sould to <br>
+		Be replaced to the right value : {{list1[4]}}</p>
+		
+		<p>And this is the whole list : </p>
+		
+		<div>
+		
+		<span  ng-repeat = "element in list1"
+		 style = "color : blue ; background-color : red; display: inline;">{{element}} , </span>
+		
+		</div>
+		
+		
+		<button ng-click = "submitFunction3()"> send3 </button>
+		
+		
+		<h1>creating new list - TEST 5 (HTML)</h1>
+		
+			<form action="http://localhost:8080/Goral_Web/goral/test5/createObj2" method="POST" target="_blank">
+			from:
+			<input name = "from">
+			to:<input name = "to" >
+			
+			<input type="submit" value="Submit" />
+			</form>
+			
+			
+			
+		<h2>Creating new list with angular </h2>
+		
+		from:<input ng-model = "roundData.from">	to:<input ng-model = "roundData.to">	
+		
+		<button ng-click = "createRound()">create</button>
+		
+		
+			<div style = "color: white; background-color: purple; padding : 10px 10px 80px 10px;">
+			
+				<h2>Add range with angular  </h2>
+			
+			from:<input ng-model = "roundData.from">	to:<input ng-model = "roundData.to">	
+			
+			<button ng-click = "addRange()">Add Range </button>
+			
+								<button ng-click ="jsonList()">json to list</button>
+				
+			
+			
+			</div>
+			
+			<div style = "color: white; background-color: red; padding : 10px 10px 80px 10px;">
+			
+			
+			<h1>Adding Singles to the drawing List </h1>
+				<input ng-model = "num" type = "number">
+				
+				<button ng-click = "addToList1(num, roundData.someNumbers);">add num to list</button>
+				<h2>The list {{roundData.someNumbers}}</h2>
+				<button ng-click = "addSingles()">Add those singles to the
+				drawing list</button>
+			</div>
+			
+			
+			
+			<div style = "color: yellow; background-color: black; padding : 10px 10px 80px 10px;">
+			
+				<h1>Removing range from list </h1>
+				from:<input ng-model = "roundData.from">	to:<input ng-model = "roundData.to">	
+			
+			<button ng-click = "removeRange()">Remove Range </button>
+			
+			</div>
+			<div style = "color: green; background-color: black; padding : 10px 10px 80px 10px;
+			border-top: solid white 1px">
+			
+				<h1>Removing singles from list </h1>
+				<input ng-model = "num" type = "number">
+				
+				<button ng-click = "addToList1(num, roundData.someNumbers);">add num to list</button>
+				<h2>The list {{roundData.someNumbers}}</h2>
+				<button ng-click = "removeSingles()">Remove those singles from the
+				drawing list</button>
+			</div>
+			<div>
+			
+				<h1>title</h1>
+			
+			</div>
+			
+			<h1>sada</h1>
+		<div >
+			
+			
+			<h1>adding values to list (for test) </h1>
+				<input ng-model = "num" type = "number">
+				
+				<button ng-click = "addToList1(num, list2);">add num to list</button>
+				<h2>The list {{list2}}</h2>
+				
+			</div>
+			
+			
+			<div style = "color: white; background-color: blue; padding : 10px 10px 80px 10px;">
+			
+			<h1>Draw!</h1>
+				
+				
+				<p>Now after we have the clean wanted list let's draw</p>
+				
+				<p>choose the amount of the number that u want to draw:</p>
+				
+				<input ng-model = 'roundData.drawnedAmt'>
+				
+				
+				<button ng-click = 'getNRandoms()'>Drawn!</button>
+				
+				The drawned numbers:
+				<h4>{{drawnedNumbersList}}</h4>
+			
+			</div>
+		</div>
+		
+		
+		<script>
+		(function(){
+			
+			
+			
+		})();
+		var MainApp = angular.module("myApp",[]);
+		MainApp.controller('myctrl', function($scope, $http){
+				
+				
+			//..$scope.roundId ;//= {};// null;
+			$scope.roundId = null;//?
+				//Invocations of functions:
+					
+				$scope.checkme = "eee";
+				
+				//$scope.init();
+				
+				
+				
+				/****functions****************/
+				
+				$scope.init = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+					
+					$http({
+			    		method : "GET",
+			    		url:'http://localhost:8080/Goral_Web/goral/test5/init'
+			    		
+			    		
+					
+			    		
+			    		
+			    	}).then(
+						function(response){	
+			    			console.log ("init method executed");
+			    			console.log("status = " + response.status);
+
+			    			
+			    			
+						},function myError(response) {
+						     console.log ("init method error");
+				    		console.log("status = " + response.status);
+
+						  }
+			    	);
+			    	 
+			     };//end of this function
+				
+			     
+			     //Ajax for create round and get the right id 
+			     $scope.createRound = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+						
+			    	///todo - handle vice versa range
+			    	/*
+			    	 if ($scope.roundData.from >= $scope.roundData.to){
+			    		 
+			    		 alert("The from number must be less than \"to\" number - list not created");
+			    		 return;
+			    		 
+			    	 }
+			     */
+			    	 
+						$http({
+				    		method : "POST",
+				    		url:'http://localhost:8080/Goral_Web/goral/test5/createNewRound',
+			    			data: angular.toJson($scope.roundData),
+				    		headers : {
+			                    'Content-Type' : 'application/json'
+			                   ,'accept': 'application/json'
+			                }
+			    		
+						
+				    		
+				    		
+				    	}).then(
+							function(response){
+								console.log(response.data.id);
+				    			console.log ("create round method executed");
+				    			console.log(response.from + "status = " + response.status);
+				    			$scope.roundData.id = response.data.id;
+				    			console.log("$scope.roundData.id = " + $scope.roundData.id);
+				    			
+				    			
+				    			
+							},function myError(response) {
+							     console.log ("create round method error");
+							     console.log("status = " + response.status);
+							  }
+				    	);
+				    	 
+				     };//end of this function
+				     
+				     
+				     $scope.addRange = function(){
+						$http({
+				    		method : "POST",
+				    		url:'http://localhost:8080/Goral_Web/goral/test5/addRange3',
+			    			data: angular.toJson($scope.roundData),
+				    		headers : {
+			                    'Content-Type' : 'application/json'
+			                   ,'accept': 'application/json'
+			                }
+			    		
+						
+				    		
+				    		
+				    	}).then(
+							function(response){
+								console.log(response.data.id);
+				    			console.log ("add range method executed");
+				    			console.log(response.from + "status = " + response.status);
+				    			$scope.roundData.id = response.data.id;
+				    			console.log("$scope.roundData.id = " + $scope.roundData.id);
+				    			
+				    			
+				    			
+							},function myError(response) {
+							     console.log ("create round method error");
+							     console.log("status = " + response.status);
+							  }
+				    	);
+				    	 
+				     };//end of this function
+				     
+				     
+				     
+				     //function for add singles numbers
+				 	$scope.addSingles =function(){
+				    	 
+				    	 
+				 		$http({
+				    		method : "POST",
+				    		url:'http://localhost:8080/Goral_Web/goral/test5/addSingles2',
+			    			data: angular.toJson($scope.roundData),
+				    		headers : {
+			                    'Content-Type' : 'application/json'
+			                   ,'accept': 'application/json'
+			                }
+			    		
+						
+				    		
+				    		
+				    	}).then(
+							function(response){
+								//console.log(response.data.id);
+				    			console.log ("add Singles method executed");
+				    			
+				    			//$scope.roundData.id = response.data.id;
+				    			console.log("$scope.roundData.id = " + $scope.roundData.id);
+				    			
+				    			
+				    			
+							},function myError(response) {
+							     console.log ("Add singles method error");
+							     console.log("status = " + response.status);
+							  }
+				    	);
+				    	 
+				     };//end of function
+				     
+				     
+				     //remove range
+				     $scope.removeRange = function(){
+							$http({
+					    		method : "POST",
+					    		url:'http://localhost:8080/Goral_Web/goral/test5/removeRange',
+				    			data: angular.toJson($scope.roundData),
+					    		headers : {
+				                    'Content-Type' : 'application/json'
+				                   ,'accept': 'application/json'
+				                }
+				    		
+							
+					    		
+					    		
+					    	}).then(
+								function(response){
+									//console.log(response.data.id);
+					    			console.log ("remove range method executed");
+					    			console.log(response.from + "status = " + response.status);
+					    			//$scope.roundData.id = response.data.id;
+					    			console.log("$scope.roundData.id = " + $scope.roundData.id);
+					    			
+					    			
+					    			
+								},function myError(response) {
+								     console.log ("remove range method error");
+								     console.log("status = " + response.status);
+								  }
+					    	);
+					    	 
+					     };//end of this function
+					     
+					     
+					     //function for removing singles numbers
+						 	$scope.removeSingles =function(){
+						    	 
+						    	 
+						 		$http({
+						    		method : "POST",
+						    		url:'http://localhost:8080/Goral_Web/goral/test5/removeSingles',
+					    			data: angular.toJson($scope.roundData),
+						    		headers : {
+					                    'Content-Type' : 'application/json'
+					                   ,'accept': 'application/json'
+					                }
+					    		
+								
+						    		
+						    		
+						    	}).then(
+									function(response){
+										//console.log(response.data.id);
+						    			console.log ("Remove Singles method executed");
+						    			
+						    			//$scope.roundData.id = response.data.id;
+						    			console.log("$scope.roundData.id = " + $scope.roundData.id);
+						    			
+						    			
+						    			
+									},function myError(response) {
+									     console.log ("remove singles method error");
+									     console.log("status = " + response.status);
+									  }
+						    	);
+						    	 
+						     };
+						     
+						     //the drawing
+						     $scope.getNRandoms = function(){
+									$http({
+							    		method : "POST",
+							    		url:'http://localhost:8080/Goral_Web/goral/test5/drawNumbers',
+						    			data: angular.toJson($scope.roundData),
+							    		headers : {
+						                    'Content-Type' : 'application/json'
+						                   ,'accept': 'application/json'
+						                }
+						    		
+									
+							    		
+							    		
+							    	}).then(
+										function(response){
+											console.log($scope.drawnedNumbersList + "=list");
+							    			console.log ("getNNumbers method executed");
+							    			console.log(response.from + "status = " + response.status);
+							    			console.log("response = "  + response);
+							    			$scope.drawnedNumbersList = response.data;
+							    			console.log("$scope.roundData.id = " + $scope.roundData.id);
+							    			console.log($scope.drawnedNumbersList );
+							    			console.log ($scope.drawnedNumbersList);
+							    			
+							    			
+							    			
+										},function myError(response) {
+										     console.log ("getNNumbers  method error");
+										     console.log("status = " + response.status);
+										  }
+							    	);
+							    	 
+							     };//end of this function
+							     
+				     /***********************************old and service functions******/
+				$scope.addToList1 = function(num, list){
+				    	 
+				    	 list.push(num);
+				    	 
+				    	 
+				     };
+				$scope.jsonList = function(){
+				    	 list = {
+				    			 
+				    	 };
+				    	 list.someNumbers = [44,3,4];
+				    	 //a = [21,3,45];
+				    	 console.log(list.someNumbers);
+					$http({
+			    		method : "POST",
+			    		url:'http://localhost:8080/Goral_Web/goral/test5/jsonList',
+		    			data: angular.toJson(list),
+			    		headers : {
+		                    'Content-Type' : 'application/json'
+		                   ,'accept': 'application/json'
+		                }
+		    		
+					
+			    		
+			    		
+			    	}).then(
+						function(response){
+							console.log(response.data.id);
+			    			console.log ("json list executed");
+			    			console.log(response.from + "status = " + response.status);
+			    			$scope.roundData.id = response.data.id;
+			    			console.log("$scope.roundData.id = " + $scope.roundData.id);
+			    			
+			    			
+			    			
+						},function myError(response) {
+						     console.log ("json list method error");
+						     console.log("status = " + response.status);
+						  }
+			    	); 
+				    	 
+				    	 
+				    	 
+				    	 
+				} ; //end of the function  
+				
+				
+				$scope.func1 = function(){
+					
+					var str = $scope.checkme;
+					alert(str);
+					};
+					
+					
+				$scope.submitFunction = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+					console.log("var = "+ $scope.sendMe + " x = " + $scope.sendMe.x + " y = " + $scope.sendMe.y);
+					$http({
+			    		method : "POST",
+			    		url:'http://localhost:8080/Goral_Web/goral/test3/tryJson',
+			    		data: angular.toJson($scope.sendMe),
+			    		headers : {
+		                    'Content-Type' : 'application/json'
+		                   //, 'accept': 'application/json'
+		                }
+					
+			    		
+			    		
+			    	}).then(
+						function(response){	
+			    			alert("send");
+			    			
+			    			/*
+			    			alert("New Person - \"" + response.data.firstName 
+			    					+" " + response.data.lastName + "\"\n has been created"
+			    					+"\ncheck the list please. ");
+			    			*/
+			    			$scope.myVar = response.data;
+			    			//$scope.clearForm();//clear the form
+						}
+			    	);
+			    	 
+			     };//end of this function
+			     
+			     $scope.submitFunction2 = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+						console.log("var = "+ $scope.sendMe2 + " x = " + $scope.sendMe2.from + " y = " 
+								+ $scope.sendMe2.to + " id = " +$scope.sendMe2.id);
+						$http({
+				    		method : "POST",
+				    		url:'http://localhost:8080/Goral_Web/goral/test3/tryJson2',
+				    		data: angular.toJson($scope.sendMe2),
+				    		headers : {
+			                    'Content-Type' : 'application/json'
+			                   //, 'accept': 'application/json'
+			                }
+						
+				    		
+				    		
+				    	}).then(
+							function(response){	
+				    			alert("send");
+				    			
+				    			/*
+				    			alert("New Person - \"" + response.data.firstName 
+				    					+" " + response.data.lastName + "\"\n has been created"
+				    					+"\ncheck the list please. ");
+				    			*/
+				    			$scope.myVar2 = response.data;
+				    			//$scope.clearForm();//clear the form
+							}
+				    	);
+				    	 
+				     };//end of this function
+			     
+				     $scope.submitFunction3 = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+							
+							$http({
+					    		method : "GET",
+					    		url:'http://localhost:8080/Goral_Web/goral/test4/displayList2/'+$scope.roundData.id,
+					    		headers : {
+				                   
+				                }
+							
+					    		
+					    		
+					    	}).then(
+								function(response){	
+					    			alert("send");
+					    			
+					    			/*
+					    			alert("New Person - \"" + response.data.firstName 
+					    					+" " + response.data.lastName + "\"\n has been created"
+					    					+"\ncheck the list please. ");
+					    			*/
+					    			$scope.list1= response.data;
+					    			//$scope.clearForm();//clear the form
+								}
+					    	);
+					    	 
+					     };//end of this function
+			     	
+					   //Invocations of functions:
+							
+							$scope.checkme = "eee";
+							
+							$scope.init();
+							
+					//variables and objects
+					
+					$scope.roundData = {
+							from : null, 
+							to: null,
+							id: null,
+							someNumbers: []
+							
+					}
+					//var for adding values before sending
+					$scope.list2 = [1,3,5];
+					
+					$scope.drawnedNumbersList = [];
+			});//controller end 
+		
+		</script>
+	</body>
+
+
+</html>
+
+

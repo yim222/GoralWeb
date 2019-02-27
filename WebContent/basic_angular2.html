@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html><!-- enter the UTF .. also...-->
+	<head>
+		<meta charset="UTF-8"/>
+		<title>GEt data from service</title>
+		<link href ="angular_styling.css" rel= "stylesheet">
+		
+		
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+		<!--<script src = "resources/angular.js"></script>-->
+		<style>
+		.explain{
+			background-color:yellow;
+			color:black;
+		}
+		</style>
+		
+	</head>
+
+	<body >
+		
+		<div ng-app ="myApp" ng-controller ="myctrl">
+		
+			<form>
+				<input type = 'text' ng-model = "checkme" >
+				
+
+			</form>
+			<p ng-init = "myVar = {x : '12', y :'17' }"> my var is : x = {{myVar.x + ' y = ' + myVar.y}}</p>
+			
+			X:
+			<input ng-model = "sendMe.x">
+			Y:
+			<input ng-model = "sendMe.y">
+			<p>Here I put var to send in the iinput. after I send it to the server it's should affect on myVar</p>
+			<button ng-click = "submitFunction()"> send </button>
+			<h1>Trying 2</h1>
+			<p ng-init = "myVar2 = {from : '12', to :'17', id : 50 }"> my var2 is : from =  
+			{{myVar2.from + ' to = ' + myVar2.to + ' id = ' +myVar2.id}}</p>
+			
+			from:
+			<input ng-model = "sendMe2.from">
+			to:
+			<input ng-model = "sendMe2.to">
+			id:
+			<input ng-model = "sendMe2.id">
+			<p>Here I put var to send in the iinput. after I send it to the server it's should affect on myVar2</p>
+			<button ng-click = "submitFunction2()"> send2 </button>
+			
+			
+		<button ng-click = "func1()"> act </button>
+		<h1>Let's Get list </h1>
+		<p>This is the list[4] of the array of the list, after u send it's sould to <br>
+		Be replaced to the right value : {{list1[4]}}</p>
+		
+		<p>And this is the whole list : </p>
+		
+		<div>
+		
+		<span  ng-repeat = "element in list1"
+		 style = "color : blue ; background-color : red; display: inline;">{{element}} , </span>
+		
+		</div>
+		
+		
+		<button ng-click = "submitFunction3()"> send3 </button>
+		
+		
+		
+		
+		</div>
+		<script>
+		var MainApp = angular.module("myApp",[]);
+		MainApp.controller('myctrl',['myService', function($scope, $http,myService){
+				
+				$scope.checkme = "eee";
+				
+				
+				$scope.func1 = function(){
+					
+					var str = $scope.checkme;
+					alert(str);
+					};
+					
+					
+				$scope.submitFunction = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+					console.log("var = "+ $scope.sendMe + " x = " + $scope.sendMe.x + " y = " + $scope.sendMe.y);
+					$http({
+			    		method : "POST",
+			    		url:'http://localhost:8080/Goral_Web/goral/test3/tryJson',
+			    		data: angular.toJson($scope.sendMe),
+			    		headers : {
+		                    'Content-Type' : 'application/json'
+		                   //, 'accept': 'application/json'
+		                }
+					
+			    		
+			    		
+			    	}).then(
+						function(response){	
+			    			alert("send");
+			    			
+			    			/*
+			    			alert("New Person - \"" + response.data.firstName 
+			    					+" " + response.data.lastName + "\"\n has been created"
+			    					+"\ncheck the list please. ");
+			    			*/
+			    			$scope.myVar = response.data;
+			    			//$scope.clearForm();//clear the form
+						}
+			    	);
+			    	 
+			     };//end of this function
+			     
+			     $scope.submitFunction2 = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+						console.log("var = "+ $scope.sendMe2 + " x = " + $scope.sendMe2.from + " y = " 
+								+ $scope.sendMe2.to + " id = " +$scope.sendMe2.id);
+						$http({
+				    		method : "POST",
+				    		url:'http://localhost:8080/Goral_Web/goral/test3/tryJson2',
+				    		data: angular.toJson($scope.sendMe2),
+				    		headers : {
+			                    'Content-Type' : 'application/json'
+			                   //, 'accept': 'application/json'
+			                }
+						
+				    		
+				    		
+				    	}).then(
+							function(response){	
+				    			alert("send");
+				    			
+				    			/*
+				    			alert("New Person - \"" + response.data.firstName 
+				    					+" " + response.data.lastName + "\"\n has been created"
+				    					+"\ncheck the list please. ");
+				    			*/
+				    			$scope.myVar2 = response.data;
+				    			//$scope.clearForm();//clear the form
+							}
+				    	);
+				    	 
+				     };//end of this function
+			     
+				     $scope.submitFunction3 = function(){//http://localhost:8080/Goral_Web/goral/test3/tryJson
+							
+							$http({
+					    		method : "GET",
+					    		url:'http://localhost:8080/Goral_Web/goral/test4/displayList2/0',
+					    		headers : {
+				                   
+				                }
+							
+					    		
+					    		
+					    	}).then(
+								function(response){	
+					    			alert("send");
+					    			
+					    			/*
+					    			alert("New Person - \"" + response.data.firstName 
+					    					+" " + response.data.lastName + "\"\n has been created"
+					    					+"\ncheck the list please. ");
+					    			*/
+					    			$scope.list1= response.data;
+					    			//$scope.clearForm();//clear the form
+								}
+					    	);
+					    	 
+					     };//end of this function
+			     
+					     
+					     
+					     //***************
+					     myService.func1();
+			}]);//controller end 
+			MainApp.service('myService', function($http){
+				
+				this.var1  = 0;
+				
+				
+				this.func1 = function(){
+					
+					var	var2 = 12;
+					var var3 = 5;
+					this.var1 = var2 + var3;
+					console.log("service var1 = " + this.var1);
+					
+				}
+				
+			});
+		</script>
+	</body>
+
+
+</html>
+
+

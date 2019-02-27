@@ -1,0 +1,220 @@
+*{
+	
+	box-sizing: border-box;	
+	
+	
+}
+
+
+
+body {
+	
+	
+
+    font-family: 'Merriweather', serif;
+
+
+	
+}
+.sysMsg{
+	
+	background-color: black;
+	color: red;
+	padding: 20px;
+	width:75%;
+	text-align: center;
+}
+
+#mainArea{
+	
+	width:80%;
+	height:80%;
+	border: solid black 2px;
+	padding:20px;
+	
+	
+}
+.featureBox{
+	
+	background-color: green;
+	padding: 20px;
+	width:75%;
+		
+}
+
+#displayListEl, .listNumber{
+	font-size: 20px;
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: 500;
+	color: black;
+	background-color: aqua;
+	display: inline-block;
+	
+}
+#displayListEl{
+	
+	position:absolute; 
+	right: 5px;
+	top: 5px;
+	width: 25%;
+	padding: 5%;
+	border: 2px solid black;
+	min-height: 100%;	
+}
+
+#drawnedNumbers, #drawnedNumbers .listNumber{
+	
+	color: white;
+	
+}
+
+.featureBox#addRangeEl {
+	
+	background-color: #cdd12e;
+	
+}
+
+/*
+background: linear-gradient(direction, color-stop1, color-stop2, ...);
+*/
+
+.featureBox#addSinglesEl {
+	
+	/*background: linear-gradient(right, blue, white);*/
+	background-color: brown;
+	/*background: linear-gradient(to right, green , blue); /* Standard syntax (must be last) */
+	
+}
+/*8DADB8*/
+
+
+.featureBox#removeRangeEl {
+	
+	/*background: linear-gradient(right, blue, white);*/
+	background-color: #8DADB8;
+	/*background: linear-gradient(to right, green , blue); /* Standard syntax (must be last) */
+	
+}
+/*40FF40*/
+.featureBox#removeSinglesEl {
+	
+	/*background: linear-gradient(right, blue, white);*/
+	background-color: #40FF40;
+	/*background: linear-gradient(to right, green , blue); /* Standard syntax (must be last) */
+	
+}
+
+.featureBox#drawEl{
+	
+	background-color: #f1fb44;
+	
+}
+
+.col1{
+	position: relative;
+	left: 0%;
+	min-width: 4%;
+	padding: 2px;
+	float: left;
+	
+}
+.col2{
+	position: relative;
+	left: 7%;
+	padding: 0px;
+	float: left;
+	
+	
+}
+.row::after {
+	
+	content: "";
+    clear: both;
+    display: table;
+	
+	
+}
+
+.header{
+	
+	position: relative;
+	background-color: #aeaeff;
+	color: white;
+	padding: 20px;
+	text-align: center;
+	width: 75%;
+	
+	
+}
+#wgh{
+	
+	left: 2px;
+	top: 2px;
+	font-size: 7px;
+	color: black;
+	text-align: left;
+	position : absolute; 
+	
+}
+@media only screen and (max-width:1050px) {
+	
+   #displayListEl, .listNumber{
+	font-size: 20px;
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: 500;
+	color: black;
+	background-color: aqua;
+	display: inline-block;
+	
+	}
+	#displayListEl{
+		
+		position: static; 
+		left: initial;
+		width: 25%;
+		padding: 5%;
+		border: 2px solid black;
+		min-height: 100%;
+		top : auto;
+		right: auto ;
+		background-color: aqua;
+		padding: 20px;
+		width:100%;	
+		font-size: 10px;
+	}
+	.featureBox, .header, .sysMsg{
+	
+		width: 100%;
+	}
+	
+	.col1{
+	
+		min-width: 15%;
+	}
+	input{
+	
+		max-width: 50%;
+	}
+}
+	/*
+	#displayListEl, .listNumber{
+	font-size: 20px;
+	font-family: 'Gloria Hallelujah', cursive;
+	font-weight: 500;
+	color: black;
+	background-color: aqua;
+	display: inline-block;
+	
+}
+#displayListEl{
+	
+	position:absolute; 
+	right: 5px;
+	top: 5px;
+	width: 25%;
+	padding: 5%;
+	border: 2px solid black;
+	min-height: 100%;	
+}
+*/
+	

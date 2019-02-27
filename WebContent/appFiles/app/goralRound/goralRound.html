@@ -1,0 +1,159 @@
+<div>
+
+	<!--<h1>Hi I am direct HTTML from the goral round template</h1>
+	  -->
+	 <div class = "header">
+	 	<span id= "wgh">With God's Help</span>
+	 	<h1>GORAL - Advanced Lottery Program</h1>
+	 	<p>With Goral you are able to make complex drawing and Lottery</p>
+	 </div>
+	<div class = "drawEl" id ="displayListEl" style = "" >
+		<h1>The choosen List: </h1>
+		<div ng-if ="!!(roundData.list)">
+			<p>{{roundData.list}}</p>
+			
+			
+			<span class = "listNumber" ng-repeat = "number in roundData.list">{{number}} ,</span>
+		</div>
+		<div  id = "drawnedNumbers">
+			<h1>The Drawned Number: </h1>
+			<div ng-if ="!!(roundData.drawnedNumbers)">
+				
+				
+				
+				<span class = "listNumber" ng-repeat = "number in roundData.drawnedNumbers">{{number}} ,</span>
+			</div>
+		</div>
+		
+		
+	
+	</div>
+	<div class = " sysMsg">
+	
+		<h3 ng-init = 'sysMsg = "system message"'  font-weight: bold; ">{{sysMsg}}</h3>
+	</div>
+	
+	
+	<div class = "featureBox" id = "createRoundEl" style = "background-color:grey;">
+		<h2 class = "row">Step 1 - Creating new list</h2>
+		
+		
+		<div class = "row">
+			<span class = "col1">from:</span><span class = "col2"> <input type = "text" ng-model = "from"></span>
+		
+		</div>
+		
+	
+		<br>
+		
+		<div class = "row">
+		
+			<span class = "col1">to:</span><span class = "col2"><input type = "number" ng-model = "to"></span>
+		</div>
+		
+		
+		<button ng-click = "createRound(from , to);" class = "row">create</button>
+	</div>
+	
+	
+	
+	<div class = "featureBox"  id = "addRangeEl" ">
+		<h2 class = "row">Step 2 - Adding ranges to the list</h2>
+		<p class = "row">Add ranges to the list as you wish </p>
+		<div class = "row">
+			<span class = "col1">
+			from:
+			</span>
+		
+		
+			<span class = "col2">
+				<input type = "number" ng-model = "newRangeFrom" >
+			</span>
+		</div>
+		<br>
+		<div class = "row">
+			<span class = "col1">
+			to:</span>
+			
+			<span class = "col2">
+			<input type = "number" ng-model = "newRangeTo">	
+			</span>
+		</div>
+		
+		
+		<button ng-click = "addRange(newRangeFrom, newRangeTo, roundData.id)" class = "row">Add New Range</button>
+	</div>
+	
+	<div class = "featureBox" id = "addSinglesEl" ">
+		<h2 class = "row">Step 3 - Adding singles to the list</h2>
+		<p class = "row">Add singles to the list as you wish<br>
+		Add each number to the singles list. Then click add to list </p>
+		<div class ="row">
+			<span class ="col1"><input ng-model = "single1" type = "number"> </span>
+		
+		</div>
+		
+		<p ng-model = "someSingles" ng-init = "someSingles = []">Singles list: <br>{{someSingles}}</p>
+		<button ng-click = "someSingles.push(single1); single1 = null;" >Add to singles list</button>
+		
+		<button ng-click = "addSingles(someSingles); someSingles = []" >Add To List</button>
+	</div>
+	
+	
+	<div class = "featureBox" id = "removeRangeEl" ">
+		<h2 >Step 4- Removing ranges from the list</h2>
+		<p>Remove ranges from the list as you wish </p>
+		<div class = "row">
+			<span class ="col1" >from:</span>
+			<span class ="col2"><input ng-model = "removeRangeFrom" ></span>
+		</div>
+		
+		<br>
+		<div class = "row">
+		
+			<span class ="col1" >to:</span>
+			<span class ="col2" ><input ng-model = "removeRangeTo"></span>	
+		</div>
+		
+		
+		<br>
+		
+		<br>
+		<button ng-click = "removeRange(removeRangeFrom, removeRangeTo, roundData.id)" >Remove Range</button>
+	</div>
+	
+	
+	
+	<div class = "featureBox" id = "removeSinglesEl" ">
+		<h2 >Step 5 - removing singles from the list</h2>
+		<p>remove singles from the list as you wish<br>
+		add each number to the singles list. Then click remove to list </p>
+		<input ng-model = "single2" type = "number">
+		<p ng-model = "someSingles2" ng-init = "someSingles2 = []">Singles list: <br>{{someSingles2}}</p>
+		<button ng-click = "someSingles2.push(single2); single2 = null;" >add to singles list</button>
+		
+		<button ng-click = "removeSingles(someSingles2); someSingles2 = []" >remove from List</button>
+	</div>
+	
+	
+	<div class = "featureBox" id = "drawEl" ">
+		<h2 >Final Step - DRAW</h2>
+		<p>enter the amount of the randoms u want to draw: <br>
+		</p>
+		<input ng-model = "drawnedAmt" type = "number">
+		
+		
+		<button ng-click = "getNRandoms(drawnedAmt);" >Draw!</button>
+	</div>
+	
+	<div  id = "drawnedNumbers" class = "featureBox listNumber">
+		<h1>The Drawned Number: </h1>
+		<div ng-if ="!!(roundData.drawnedNumbers)">
+			
+			
+			
+			<span class = "listNumber" ng-repeat = "number in roundData.drawnedNumbers">{{number}} ,</span>
+		</div>
+	</div>
+			
+</div>

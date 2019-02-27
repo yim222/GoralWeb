@@ -1,0 +1,28 @@
+
+
+<div>
+
+	<h1>Hello I am direct html from mainApp.html</h1>
+	<a href = "#homepage">Home </a> <a href = "#aa"> Goral Round</a>
+	
+	<h2>{{testDirective}}</h2>
+	<div id = "mainArea"><ng-view></ng-view></div>
+	
+<div ng-app = "goralRound.module" ng-controller = "GoralRoundController">
+	
+		<goral-round-directive></goral-round-directive>
+	 
+	</div> 
+	
+	
+	<script type="text/ng-template" id="aa.html">
+  <p>This is the content of the template</p>
+
+	
+		<goral-round-directive></goral-round-directive>
+	 
+	 
+</script>
+
+</div>
+
